@@ -392,7 +392,22 @@ section { padding: 96px 0; }
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .format-card + .format-card { background: var(--card-online), var(--raised); }
-.format-card:hover { transform: translateY(-3px); box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.45); }
+/* Anheben beim Drüberfahren – einheitlich für alle Karten (nur Geräte mit Maus) */
+.format-card, .event, .event-card, .about-facts, .steps li, .topics li, .orbit-stop span, .orbit-list span, .request-info li {
+  transition: transform 0.2s ease, translate 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+@media (hover: hover) {
+  .format-card:hover, .event:hover, .event-card:hover, .about-facts:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.45);
+  }
+  .event-card:hover { border-color: var(--ring); }
+  .steps li:hover, .topics li:hover, .request-info li:hover { transform: translateY(-3px); }
+  .topics li:hover strong::before, .orbit-stop span:hover::before { box-shadow: 0 0 0 5px var(--warm-soft); }
+  /* Kreis-Labels: eigene translate-Eigenschaft, damit die Einblend-Animation nicht stört */
+  .orbit-stop span:hover, .orbit-list span:hover { translate: 0 -3px; border-color: var(--ring); }
+  .steps li:hover::before { background: var(--accent); color: var(--on-accent); }
+}
 .format-card h3 { margin: 14px 0 6px; font-size: 1.5rem; }
 .format-card p { color: var(--secondary); margin: 0 0 20px; }
 .format-card .btn { margin-top: auto; width: 100%; }
@@ -583,6 +598,7 @@ section { padding: 96px 0; }
   counter-reset: s;
 }
 .steps li { counter-increment: s; }
+.steps li::before { transition: background 0.2s, color 0.2s; }
 .steps li::before {
   content: counter(s);
   display: grid;
