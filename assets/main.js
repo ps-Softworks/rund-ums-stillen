@@ -36,6 +36,14 @@
     });
   });
 
+  // "Platz anfragen" bei Workshops: Nachricht vorausfüllen
+  document.querySelectorAll("[data-anliegen]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var msg = form.elements.nachricht;
+      msg.value = "Ich möchte einen Platz anfragen: " + btn.dataset.anliegen + ".\n" + msg.value;
+    });
+  });
+
   var nameInput = form.elements.name;
   var mailInput = form.elements.email;
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
