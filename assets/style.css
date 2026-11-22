@@ -347,22 +347,18 @@ section { padding: 96px 0; }
 
 .section-head { max-width: 640px; margin-bottom: 48px; }
 
-/* Angebot: Phasen-Liste */
-.phases {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 0.5px solid var(--line);
-}
+/* Angebot: Kurse nach Phasen */
+.phases { border-top: 0.5px solid var(--line); }
 
 .phase {
   display: grid;
-  grid-template-columns: 220px 1fr auto;
-  gap: 8px 32px;
-  padding: 28px 0;
+  grid-template-columns: 240px 1fr;
+  gap: 16px 40px;
+  padding: 36px 0;
   border-bottom: 0.5px solid var(--line);
-  align-items: baseline;
 }
+
+.phase-head p { margin: 6px 0 0; color: var(--secondary); font-size: 0.98rem; }
 
 .phase-name {
   display: flex;
@@ -370,7 +366,7 @@ section { padding: 96px 0; }
   gap: 10px;
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0;
 }
 .phase-name::before {
@@ -380,22 +376,71 @@ section { padding: 96px 0; }
   border-radius: 50%;
   background: var(--accent);
   flex: none;
-  transform: translateY(-1px);
 }
-.phase p { margin: 0; color: var(--secondary); }
-.phase-meta { font-size: 0.95rem; color: var(--secondary); white-space: nowrap; }
+
+.courses { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+
+.course {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--raised);
+  border: 0.5px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+}
+.course h4 { margin: 0 0 4px; font: 700 1.1rem/1.25 var(--display); letter-spacing: -0.01em; }
+.course p { margin: 0; color: var(--secondary); font-size: 0.98rem; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 12px 0 0; padding: 0; }
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--surface-2);
+  color: var(--secondary);
+}
+/* Format nicht nur über Farbe: eigenes Symbol je Format */
+.tag-place, .tag-online { background: var(--accent-soft); color: var(--content); }
+.tag-place::before, .tag-online::before { content: ""; width: 9px; height: 9px; flex: none; }
+.tag-place::before { border-radius: 50%; background: var(--accent); }
+.tag-online::before { border-radius: 2px; border: 2px solid var(--accent); width: 11px; height: 8px; }
+
+.course-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex: none;
+}
+.price { font: 700 1.2rem/1 var(--display); white-space: nowrap; }
+
+.btn-small {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 0.95rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.btn-small:hover { filter: none; background: var(--accent); color: var(--on-accent); }
 
 .formats {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 40px;
-  margin: 40px 0 0;
+  margin: 36px 0 0;
   padding: 0;
   list-style: none;
+  color: var(--secondary);
+  font-size: 0.95rem;
 }
-.formats li { max-width: 300px; }
-.formats strong { display: block; font-family: var(--display); font-size: 1.05rem; }
-.formats span { color: var(--secondary); font-size: 0.95rem; }
+.formats li { display: flex; align-items: center; gap: 10px; }
 
 /* Über mich */
 .about {
@@ -513,7 +558,7 @@ legend, .label {
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 .field { margin-bottom: 18px; }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   width: 100%;
   min-height: 48px;
   font: inherit;
@@ -525,7 +570,9 @@ legend, .label {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 .field textarea { min-height: 120px; resize: vertical; }
-.field input:focus, .field textarea:focus {
+.kurs-format { display: block; margin-top: 6px; font-size: 0.9rem; }
+.field select.flash { box-shadow: 0 0 0 4px var(--accent-soft); border-color: var(--accent); }
+.field input:focus, .field textarea:focus, .field select:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 4px var(--accent-soft);
@@ -585,7 +632,6 @@ legend, .label {
   .hero-grid > .orbit-col { order: -1; }
   .about .portrait { max-width: 240px; }
   .phase { grid-template-columns: 1fr; }
-  .phase-meta { white-space: normal; }
   .steps { grid-template-columns: 1fr; }
 }
 
@@ -601,6 +647,8 @@ legend, .label {
   .orbit-list { display: flex !important; }
 
   .row { grid-template-columns: 1fr; gap: 0; }
+  .course { flex-direction: column; align-items: stretch; gap: 14px; padding: 18px; }
+  .course-side { flex-direction: row; justify-content: space-between; align-items: center; }
   .form { padding: 22px 18px; }
 
   .cta-bar {

@@ -23,6 +23,42 @@
   var form = document.getElementById("anfrage-form");
   if (!form) return;
   var status = form.querySelector(".form-status");
+
+  // Kursauswahl aus den Kurskarten aufbauen (Kurse nur an einer Stelle pflegen)
+  var kursSelect = form.elements.kurs;
+  var kursFormat = form.querySelector(".kurs-format");
+  var formatOf = {};
+  document.querySelectorAll("#angebot .phase").forEach(function (phase) {
+    var group = document.createElement("optgroup");
+    group.label = phase.querySelector(".phase-name").textContent.trim();
+    phase.querySelectorAll(".course").forEach(function (course) {
+      var title = course.querySelector("h4").textContent.trim();
+      var place = course.querySelector(".tag-place, .tag-online");
+      formatOf[title] = place ? place.textContent.trim() : "";
+      var opt = document.createElement("option");
+      opt.value = title;
+      opt.textContent = title + (formatOf[title] ? " · " + formatOf[title] : "");
+      group.appendChild(opt);
+    });
+    kursSelect.appendChild(group);
+  });
+
+  function showFormat() {
+    var f = formatOf[kursSelect.value];
+    kursFormat.textContent = f === "Online" ? "Dieser Kurs findet online per Videocall statt."
+      : f === "Vor Ort" ? "Dieser Kurs findet vor Ort statt." : "";
+  }
+  kursSelect.addEventListener("change", showFormat);
+
+  // "Anfragen" an einem Kurs wählt ihn im Formular vor
+  document.querySelectorAll("[data-kurs]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      kursSelect.value = btn.dataset.kurs;
+      showFormat();
+      kursSelect.classList.add("flash");
+      setTimeout(function () { kursSelect.classList.remove("flash"); }, 1600);
+    });
+  });
   var nameInput = form.elements.name;
   var mailInput = form.elements.email;
   var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -98,9 +134,9 @@
       return;
     }
 
+    var kurs = data.get("kurs") || "Noch unsicher";
     var body = [
-      "Phase: " + data.get("phase"),
-      "Beratung: " + data.get("format"),
+      "Kurs: " + kurs + (formatOf[kurs] ? " (" + formatOf[kurs] + ")" : ""),
       "Zeit: " + zeiten,
       "",
       "Name: " + data.get("name"),
@@ -112,7 +148,7 @@
 
     window.location.href =
       "mailto:" + form.dataset.email +
-      "?subject=" + encodeURIComponent("Terminanfrage – " + data.get("phase")) +
+      "?subject=" + encodeURIComponent("Kursanfrage – " + kurs) +
       "&body=" + encodeURIComponent(body);
     setStatus("Dein E-Mail-Programm öffnet sich. Tippe dort auf „Senden“.", "ok");
   });
