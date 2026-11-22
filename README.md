@@ -5,7 +5,7 @@ Statische Website für die Stillberatung von Inna Singer (GitHub Pages).
 ## Offene Platzhalter (gelb markiert auf der Seite)
 - Fotos: `assets/img/inna.jpg` (Kreis im Hero) und `assets/img/inna-portrait.jpg` – im HTML auskommentierte `<img>`-Zeilen aktivieren
 - Region / Einzugsgebiet, Qualifikation, persönlicher Text, Sprachen
-- Stillberatung: Dauer und Preis je Format (Vor Ort / Online), Ort für Vor-Ort-Termine
+- Stillberatung: Dauer und Preis für Hausbesuch und Online, Einzugsgebiet der Hausbesuche
 - Impressum und Datenschutz vollständig ausfüllen
 - E-Mail `kontakt@rund-ums-stillen.de` muss bei Strato existieren (oder überall ersetzen)
 - Formular: `data-endpoint` in `index.html` auf einen Formular-Dienst setzen (z. B. Formspree), sonst öffnet sich das E-Mail-Programm

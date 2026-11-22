@@ -24,7 +24,7 @@
   if (!form) return;
   var status = form.querySelector(".form-status");
 
-  // "Vor Ort / Online anfragen" wählt das Format im Formular vor
+  // "Hausbesuch / Online anfragen" wählt das Format im Formular vor
   document.querySelectorAll("[data-format]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var radio = form.querySelector('input[name="format"][value="' + btn.dataset.format + '"]');
