@@ -12,3 +12,6 @@ Statische Website für die Stillberatung von Inna Singer (GitHub Pages).
 ## Design
 Leitidee „rund ums“: der Stillkreis mit den fünf Phasen. Hell = Milchweiß/Nachtblau, Dunkel = Nachtlicht.
 Rundschrift (`ui-rounded`, Fallback Nunito lokal), Systemschrift für Text. Keine externen Dienste, keine Cookies.
+
+## Cache
+Nach Änderungen an CSS/JS die Versionsnummer `?v=…` in den HTML-Dateien erhöhen, sonst zeigen Browser die alte Fassung.
