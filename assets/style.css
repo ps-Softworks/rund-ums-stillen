@@ -521,9 +521,21 @@ section { padding: 96px 0; }
 .events-more { margin: 24px 0 0; color: var(--secondary); }
 
 /* Über mich */
+.about-facts {
+  margin: 0;
+  padding: 8px 28px;
+  border-radius: var(--r-md);
+  border: 0.5px solid var(--line);
+  background: var(--card-home), var(--raised);
+}
+.about-facts div { padding: 16px 0; border-bottom: 0.5px solid var(--line); }
+.about-facts div:last-child { border-bottom: 0; }
+.about-facts dt { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.about-facts dd { margin: 4px 0 0; font-weight: 600; }
+
 .about {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 64px;
   align-items: center;
 }
@@ -707,7 +719,6 @@ legend, .label {
 @media (max-width: 900px) {
   .hero-grid, .request, .about { grid-template-columns: 1fr; gap: 40px; }
   .hero-grid > .orbit-col { order: -1; }
-  .about .portrait { max-width: 240px; }
   .offer { grid-template-columns: 1fr; }
 
   .steps { grid-template-columns: 1fr; }
