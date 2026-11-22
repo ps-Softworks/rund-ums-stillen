@@ -16,6 +16,24 @@
     }, { threshold: 0.05 }).observe(requestSection);
   }
 
+  // Mobiles Menü
+  var menuBtn = document.querySelector(".menu-btn");
+  var navLinks = document.getElementById("nav-links");
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener("click", function () {
+      var open = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.textContent = open ? "Schließen" : "Menü";
+    });
+    navLinks.addEventListener("click", function (e) {
+      if (e.target.closest("a")) {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "Menü";
+      }
+    });
+  }
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 

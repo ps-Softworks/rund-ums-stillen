@@ -116,6 +116,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 }
 
 h1, h2, h3 {
+  text-wrap: balance;
   font-family: var(--display);
   font-weight: 700;
   line-height: 1.12;
@@ -261,6 +262,19 @@ p { margin: 0 0 1em; }
 }
 .nav-links a:not(.btn):hover { color: var(--accent); }
 .nav-links .btn { min-height: 38px; padding: 0 18px; font-size: 0.95rem; margin-left: 8px; }
+
+.menu-btn {
+  display: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--raised);
+  color: var(--content);
+  font: 600 0.95rem/1 var(--text);
+  cursor: pointer;
+}
+.menu-btn[aria-expanded="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
 /* ---------- Hero ---------- */
 .hero { padding: 64px 0 104px; background: var(--hero-bg); }
@@ -504,7 +518,7 @@ section { padding: 96px 0; }
 
 .events {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   list-style: none;
   margin: 0;
@@ -735,7 +749,8 @@ legend, .label {
 @media (max-width: 900px) {
   .hero-grid, .request, .about { grid-template-columns: 1fr; gap: 40px; }
   .hero-grid > .orbit-col { order: -1; }
-  .offer { grid-template-columns: 1fr; }
+  .events { grid-template-columns: repeat(2, 1fr); }
+  .orbit { --size: min(340px, calc(100% - 150px)); }
 
   .steps { grid-template-columns: 1fr; }
 }
@@ -744,10 +759,32 @@ legend, .label {
   :root { --gutter: 16px; }
   section { padding: 64px 0; }
   .hero { padding: 24px 0 56px; }
-  .nav-links { display: none; } /* Aktion sitzt unten in der CTA-Leiste */
+  /* Menü statt Linkleiste; Termin-Aktion sitzt unten in der CTA-Leiste */
+  .menu-btn { display: inline-flex; align-items: center; }
+  .nav { position: relative; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    padding: 8px var(--gutter) 16px;
+    background: var(--surface);
+    border-bottom: 0.5px solid var(--line);
+    box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.5);
+  }
+  .nav-links.open a:not(.btn) { display: flex; min-height: 48px; padding: 0; font-size: 1.05rem; border-bottom: 0.5px solid var(--line); }
+  .nav-links .nav-cta { display: none; }
+  .offer, .events { grid-template-columns: 1fr; }
+  .orbit-list { margin-top: 18px; gap: 6px; }
+  .orbit-list span { min-height: 36px; font-size: 0.85rem; padding: 0 12px 0 9px; }
 
   /* Kreis kompakt: Phasen-Labels als Liste darunter statt rundherum */
-  .orbit { --size: min(280px, 76vw); }
+  .orbit { --size: min(210px, 56vw); }
   .orbit-stop { display: none; }
   .orbit-list { display: flex !important; }
 
